@@ -1,14 +1,11 @@
 const success = require('./enhancer/success/success');
 const repair = require('./enhancer/repair/repair');
+const failure = require('./enhancer/failure/failure');
 
 const enhancer = {
-  repair: (item) => {
-    const newItem = { ...item };
-    newItem.durability = 100;
-
-    return newItem;
-  },
-  success
+  repair,
+  success,
+  failure
 }
 
 module.exports = {
