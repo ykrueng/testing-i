@@ -2,9 +2,7 @@ const {
   checkName,
   checkType,
   checkDurability,
-  checkEnhancement,
-  addEnhancement,
-  updateName
+  checkEnhancement
 } = require("../helpers");
 
 module.exports = item => {
