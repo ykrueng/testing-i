@@ -35,6 +35,24 @@ describe('Enhancer Repair', () => {
       expect(() => enhancer.repair({ enhancement: 1 })).toThrow();
       expect(() => enhancer.repair({ durability: 190 })).toThrow();
     });
+
+    test('should throw error if durability less than 20 when enhancement is between +0 and +14', () => {
+      expect(() => enhancer.repair({
+        ...item,
+        durability: 19,
+        enhancement: '6'
+      })).toThrow();
+      expect(() => enhancer.repair({
+        ...item,
+        durability: 2,
+        enhancement: '13'
+      })).toThrow();
+      expect(() => enhancer.repair({
+        ...item,
+        durability: 19,
+        enhancement: '14'
+      })).toThrow();
+    });
   });
 
   it('should return new item', () => {

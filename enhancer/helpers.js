@@ -40,6 +40,8 @@ function checkType(item) {
 }
 
 function checkDurability(item) {
+  const currentLevel = e_levels.findIndex(e => e === item.enhancement);
+  if (currentLevel <= 14 && item.durability < 20) throw new Error('Invalid durability & enhancement level');
   return item.durability && item.durability > 0 && item.durability <= 100;
 }
 
@@ -51,9 +53,13 @@ function checkEnhancement(item) {
   );
 }
 
-function addEnhancement(currentLevel) {
-  if (currentLevel === "TET") return currentLevel;
+function addEnhancement(currentLevel, durability) {
   const current = e_levels.findIndex(e => e === currentLevel);
+
+  if (currentLevel === "TET"
+    || durability < 25 && current <= 14
+    || durability < 10 && current >= 15
+  ) return currentLevel;
   return e_levels[current + 1];
 }
 

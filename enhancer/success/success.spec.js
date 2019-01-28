@@ -35,6 +35,24 @@ describe('Enhancer Success', () => {
       expect(() => enhancer.success({ enhancement: 1 })).toThrow();
       expect(() => enhancer.success({ durability: 190 })).toThrow();
     });
+
+    test('should throw error if durability less than 20 when enhancement is between +0 and +14', () => {
+      expect(() => enhancer.success({
+        ...item,
+        durability: 19,
+        enhancement: '6'
+      })).toThrow();
+      expect(() => enhancer.success({
+        ...item,
+        durability: 2,
+        enhancement: '13'
+      })).toThrow();
+      expect(() => enhancer.success({
+        ...item,
+        durability: 19,
+        enhancement: '14'
+      })).toThrow();
+    });
   });
 
   it('should return new item', () => {
@@ -55,7 +73,17 @@ describe('Enhancer Success', () => {
       expect(enhancer.success({ ...item, enhancement: 'DUO' }).enhancement).toBe('TRI');
       expect(enhancer.success({ ...item, enhancement: 'TRI' }).enhancement).toBe('TET');
       expect(enhancer.success({ ...item, enhancement: 'TET' }).enhancement).toBe('TET');
+    });
+
+    it('should not increace enhancement if enhancement is 14 or lower and durability below 25', () => {
+      expect(enhancer.success({ ...item, enhancement: '13', durability: 20 }).enhancement).toBe('13');
+      expect(enhancer.success({ ...item, enhancement: '10', durability: 24 }).enhancement).toBe('10');
     })
+    
+    it('should not increace enhancement if enhancement is 15 or higher and durability below 10', () => {
+      expect(enhancer.success({ ...item, enhancement: '15', durability: 9 }).enhancement).toBe('15');
+      expect(enhancer.success({ ...item, enhancement: 'DUO', durability: 4 }).enhancement).toBe('DUO');
+    });
   });
 
   it('should update name based on Enhancement Level', () => {

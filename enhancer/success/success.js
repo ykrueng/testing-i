@@ -16,7 +16,7 @@ module.exports = item => {
 
   if (!checkEnhancement(item)) throw new Error("Invalid enhancement property");
 
-  const newEnhancementLevel = addEnhancement(item.enhancement);
+  const newEnhancementLevel = addEnhancement(item.enhancement, item.durability);
 
   const newItem = {
     ...item,
