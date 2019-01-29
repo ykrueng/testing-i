@@ -2,7 +2,8 @@ const {
   checkName,
   checkType,
   checkDurability,
-  checkEnhancement
+  checkEnhancement,
+  reduceDurability
 } = require("../helpers");
 
 module.exports = item => {
@@ -14,8 +15,12 @@ module.exports = item => {
 
   if (!checkEnhancement(item)) throw new Error("Invalid enhancement property");
 
+  const { enhancement, durability } = reduceDurability(item.enhancement, item.durability);
+
   const newItem = {
-    ...item
+    ...item,
+    enhancement,
+    durability
   };
 
   return newItem;

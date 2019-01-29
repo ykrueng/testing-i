@@ -64,4 +64,19 @@ describe('Enhancer Failure', () => {
     expect(typeof newItem.durability).toBe('number');
     expect(typeof newItem.enhancement).toBe('string');
   });
-})
+
+  describe('Update durability', () => {
+    it('should decrease durability by 5 if enhancement between 0 & 14', () => {
+      expect(enhancer.failure({ ...item, enhancement: '0', durability: 100 }).durability).toBe(95);
+      expect(enhancer.failure({ ...item, enhancement: '10', durability: 95 }).durability).toBe(90);
+    })
+    it('should decrease durability by 10 if enhancement greater 14', () => {
+      expect(enhancer.failure({ ...item, enhancement: '15', durability: 100 }).durability).toBe(90);
+      expect(enhancer.failure({ ...item, enhancement: 'PEN', durability: 95 }).durability).toBe(85);
+    });
+    it('should decrease durability by 10 if enhancement greater 14', () => {
+      expect(enhancer.failure({ ...item, enhancement: '15', durability: 100 }).durability).toBe(90);
+      expect(enhancer.failure({ ...item, enhancement: 'PEN', durability: 95 }).durability).toBe(85);
+    });
+  });
+});

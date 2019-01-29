@@ -28,7 +28,8 @@ module.exports = {
   checkDurability,
   checkEnhancement,
   addEnhancement,
-  updateName
+  updateName,
+  reduceDurability
 };
 
 function checkName(item) {
@@ -56,7 +57,7 @@ function checkEnhancement(item) {
 function addEnhancement(currentLevel, durability) {
   const current = e_levels.findIndex(e => e === currentLevel);
 
-  if (currentLevel === "TET"
+  if (currentLevel === "PEN"
     || durability < 25 && current <= 14
     || durability < 10 && current >= 15
   ) return currentLevel;
@@ -68,4 +69,18 @@ function updateName(currentLevel, name) {
 
   const current = e_levels.findIndex(e => e === currentLevel);
   return `[${current < 16 ? "+" : ""}${e_levels[current]}] ${strippedName}`;
+}
+
+function reduceDurability(currentLevel, durability) {
+  const current = e_levels.findIndex(e => e === currentLevel);
+
+  if (current < 15) {
+    return {enhancement: currentLevel, durability: durability - 5};
+  } else {
+    return {
+      enhancement: currentLevel,
+      durability: durability - 10
+    };
+  }
+  return e_levels[current + 1];
 }

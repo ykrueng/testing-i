@@ -72,7 +72,7 @@ describe('Enhancer Success', () => {
       expect(enhancer.success({ ...item, enhancement: '15' }).enhancement).toBe('PRI');
       expect(enhancer.success({ ...item, enhancement: 'DUO' }).enhancement).toBe('TRI');
       expect(enhancer.success({ ...item, enhancement: 'TRI' }).enhancement).toBe('TET');
-      expect(enhancer.success({ ...item, enhancement: 'TET' }).enhancement).toBe('TET');
+      expect(enhancer.success({ ...item, enhancement: 'TET' }).enhancement).toBe('PEN');
     });
 
     it('should not increace enhancement if enhancement is 14 or lower and durability below 25', () => {
@@ -92,6 +92,6 @@ describe('Enhancer Success', () => {
     expect(enhancer.success({ ...item, enhancement: '15' }).name).toBe('[PRI] item');
     expect(enhancer.success({ ...item, enhancement: 'DUO' }).name).toBe('[TRI] item');
     expect(enhancer.success({ ...item, enhancement: 'TRI' }).name).toBe('[TET] item');
-    expect(enhancer.success({ ...item, enhancement: 'TET' }).name).toBe('[TET] item');
+    expect(enhancer.success({ ...item, enhancement: 'PEN' }).name).toBe('[PEN] item');
   })
 })
